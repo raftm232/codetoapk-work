@@ -1,0 +1,6 @@
+{
+  "name": "أداة التشفير",
+  "description": "أداة متقدمة لتشفير وفك تشفير ملفات 0x457 و FFSZ و XXTEA Base64 وملفات ZIP التابعة للعبة Family Farm Seaside",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
