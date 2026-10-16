@@ -12,19 +12,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
+          distribution: 'temurin'
           java-version: '17'
 
-      - name: Build debug APK with Gradle
+      - name: Set up Gradle Environment
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Generate Debug Keystore
+        run: |
+          keytool -genkeypair -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -dname "CN=Android Debug,O=Android,C=US" -keyalg RSA -keysize 2048 -validity 10000
+
+      - name: Build Debug APK
         run: gradle assembleDebug --no-daemon
 
-      - name: Upload installable debug APK
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: FFS-Tool-debug-apk
